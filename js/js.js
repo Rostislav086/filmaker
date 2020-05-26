@@ -5,6 +5,7 @@
 const leftMenu = document.querySelector(".left-menu"),
   hamburger = document.querySelector(".hamburger"),
   tvShowsItem = document.querySelectorAll(".tv-shows__item"),
+  tvCardImgAll = document.querySelectorAll(".tv-card__img"),
   tvCardImg = document.querySelector(".tv-card__img");
 
 // Определяем переменные ------------------------------------------------------
@@ -61,5 +62,27 @@ const backDropImg = () => {
 hamburger.addEventListener("click", openMenu);
 document.addEventListener("click", closeMenu);
 leftMenu.addEventListener("click", openDropdownMenu);
-tvCardImg.addEventListener("mouseover", backDropImg);
-tvCardImg.addEventListener("mouseout", backSrcImg);
+// tvCardImg.addEventListener("mouseover", backDropImg);
+// tvCardImg.addEventListener("mouseout", backSrcImg);
+
+tvCardImgAll.forEach((element) => {
+  element.addEventListener("mouseover", () => {
+    let srcImg = element.getAttribute("src");
+    let dataBackdrop = element.getAttribute("data-backdrop");
+
+    if (srcImg != "" && dataBackdrop != 0) {
+      element.setAttribute("src", dataBackdrop);
+      element.setAttribute("data-backdrop", srcImg);
+    }
+  });
+
+  element.addEventListener("mouseout", () => {
+    let srcImg = element.getAttribute("src");
+    let dataBackdrop = element.getAttribute("data-backdrop");
+
+    if (srcImg != "" && dataBackdrop != 0) {
+      element.setAttribute("data-backdrop", srcImg);
+      element.setAttribute("src", dataBackdrop);
+    }
+  });
+});
